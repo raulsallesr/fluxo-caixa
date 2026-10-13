@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 
 from engine import safras as sf
-from engine.calendario import Cal
+from engine.calendario import Cal, anterior_dia_util
 from engine.modelos import previsao as pv
 from engine.modelos.backtest import backtest_horizonte
 from engine.modelos.pagamento import Pag
@@ -156,8 +156,12 @@ def gravar(destino: Path, **kw) -> Snapshot:
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--saida", default="web/public/data/snapshot.json")
-    ap.add_argument("--as-of", default=None, help="AAAA-MM-DD (padrão: data da config)")
+    ap.add_argument("--as-of", default=None,
+                    help="AAAA-MM-DD, ou 'hoje' (dia útil mais recente); padrão: data da config")
     a = ap.parse_args()
-    cfg = Config(as_of=date.fromisoformat(a.as_of)) if a.as_of else Config()
+    if a.as_of == "hoje":
+        cfg = Config(as_of=anterior_dia_util(date.today()))
+    else:
+        cfg = Config(as_of=date.fromisoformat(a.as_of)) if a.as_of else Config()
     s = gravar(Path(a.saida), cfg=cfg)
     print(f"snapshot v{s.versao} gravado em {a.saida} (as_of {s.as_of})")
