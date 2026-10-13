@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light dark;
+  --bg: 246 248 251;
+  --surf: 255 255 255;
+  --surf2: 238 242 247;
+  --borda: 218 224 233;
+  --tx: 17 24 39;
+  --tx2: 75 85 99;
+  --azul: 29 78 216;
+  --laranja: 194 65 12;
+  --vermelho: 185 28 28;
+  --verde: 21 128 61;
+  --cinza: 107 114 128;
+  --onazul: 255 255 255;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: 11 15 22;
+    --surf: 20 26 36;
+    --surf2: 29 37 50;
+    --borda: 45 55 72;
+    --tx: 233 237 243;
+    --tx2: 160 171 187;
+    --azul: 96 165 250;
+    --laranja: 251 146 60;
+    --vermelho: 248 113 113;
+    --verde: 74 222 128;
+    --cinza: 148 158 175;
+    --onazul: 11 15 22;
+  }
+}
+
+html { -webkit-text-size-adjust: 100%; }
+body {
+  @apply bg-bg text-tx font-sans antialiased;
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+.num { font-variant-numeric: tabular-nums; }
+
+:focus-visible {
+  outline: 3px solid rgb(var(--azul));
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@layer components {
+  .card { @apply rounded-xl border border-borda bg-surf p-4 sm:p-5; }
+  .h-sec { @apply text-lg font-semibold tracking-tight; }
+  .muted { @apply text-tx2 text-sm; }
+  .btn {
+    @apply inline-flex min-h-[44px] items-center justify-center rounded-lg border border-borda bg-surf2 px-4 text-sm font-medium text-tx hover:bg-borda/50;
+  }
+  .btn-primario { @apply border-transparent bg-azul hover:opacity-90; color: rgb(var(--onazul)); }
+  .th { @apply px-3 py-2 text-right text-xs font-semibold text-tx2 whitespace-nowrap; }
+  .td { @apply px-3 py-2 text-right text-sm num whitespace-nowrap; }
+}
+
+.tabela-wrap { max-height: min(70vh, 640px); overflow: auto; border-radius: 0.75rem; }
+.tabela-wrap thead th { position: sticky; top: 0; z-index: 2; background: rgb(var(--surf2)); }
+.tabela-wrap tbody th, .tabela-wrap thead th:first-child { position: sticky; left: 0; background: rgb(var(--surf)); z-index: 1; }
+.tabela-wrap thead th:first-child { z-index: 3; background: rgb(var(--surf2)); }
+.linha-proj th, .linha-proj td { background: rgb(var(--azul) / 0.07); }
+.linha-proj th { background: rgb(var(--surf)) !important; box-shadow: inset 3px 0 0 rgb(var(--azul)); }
+tr.clicavel { cursor: pointer; }
+.tabela-wrap .td { padding-block: 0.8rem; }
+tr.clicavel:hover td, tr.clicavel:hover th { background: rgb(var(--surf2)); }
+
+input[type="range"] { width: 100%; height: 44px; accent-color: rgb(var(--azul)); background: transparent; }
+.campo-num {
+  @apply min-h-[44px] w-28 rounded-lg border border-borda bg-surf px-3 text-right text-sm num text-tx;
+}
+
+@media (prefers-reduced-motion: reduce) { * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; } }

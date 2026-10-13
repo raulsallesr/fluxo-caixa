@@ -26,7 +26,7 @@ from engine.snapshot import (
 )
 
 NOME_EMPRESA = "Distribuidora Maré Alta S.A. (fictícia)"
-CAIXA_MINIMO = 15_000_000.0
+CAIXA_MINIMO = 12_000_000.0
 HORIZONTE = 65
 JANELA_DIARIO = 90
 FUTURO_DIARIO = 10

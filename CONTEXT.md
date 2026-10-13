@@ -10,10 +10,11 @@ Monte Carlo no navegador. Plano completo: `C:\Users\User\.claude\plans\ol-veja-m
   rolling-origin, snapshot v1 (pydantic) via `python -m engine.exportar`. 28+ testes, cobertura ~98%.
 - Backtest (12 origens, 13 semanas): WAPE entradas 11,8% vs 16,0% (baseline), saídas 7,6% vs 17,4%,
   saldo 5,8% vs 16,4%, cobertura P10–P90 78%. Sem viés relevante (saídas −2,5%).
-- Achado da base: ~97% de chance de romper o caixa mínimo (R$ 15 mi) até meados de dezembro/2026
-  (13º + IRPJ + distribuição + compras sazonais) — propriedade real da empresa sintética.
-- **Web (React/Vite/TS/ECharts)**: em construção por agente em `web/` (4 páginas, simulador TS em
-  Web Worker, testes de paridade vs Python). Ver status no commit seguinte.
+- Achado da base: caixa mínimo R$ 12 mi; ~74% de chance de romper em algum dia das 13 semanas, ruptura
+  mediana ~dia 50 (dezembro/2026: 13º + IRPJ + distribuição + compras sazonais) — propriedade da empresa sintética.
+- **Web pronto** (React/Vite/TS/ECharts, `web/`): 4 páginas (Hoje, Projeção, Cenários, Entenda), simulador
+  TS em Web Worker. Gates: typecheck, 29 testes vitest (paridade com Python: maior diferença R$ 234 mil),
+  build, e2e Playwright 23/23 (4 viewports, sem overflow, alvos ≥44px). Screenshots em `docs/assets/screens/`.
 - CI (`ci.yml`) e deploy no GitHub Pages (`deploy.yml`, cron diário com `--as-of hoje`) escritos, ainda
   sem remoto. README bilíngue e `docs/METODOLOGIA.md` prontos.
 - Node 24 instalado (terminal novo para o PATH).
@@ -25,8 +26,8 @@ Monte Carlo no navegador. Plano completo: `C:\Users\User\.claude\plans\ol-veja-m
 - Compliance/RH da Fits: confirmar política sobre portfólio público na área de atuação antes do post.
 
 ## Próximo passo
-Fechar o web (gates + screenshots), regenerar o snapshot, commit; criar repo remoto; rascunhos de posts
-em `docs/publication/`. v2: orçado × realizado, upload de CSV, efeito cliente no atraso, copiloto.
+Criar repo remoto + Pages (precisa `gh auth login`); conferir modo escuro; reduzir bundle (786 kB, ECharts)
+com import dinâmico. v2: orçado × realizado, upload de CSV, efeito cliente no atraso, copiloto.
 
 ## Convenções
 Gates: `ruff check .` e `pytest` (cobertura ≥ 85%). Nenhum dado real, nenhum segredo.

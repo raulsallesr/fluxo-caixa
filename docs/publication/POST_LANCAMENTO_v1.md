@@ -49,7 +49,7 @@ Detalhes e backtest: <LINK>/#/entenda
 
 ## Post 3 — o achado (ganho de narrativa)
 
-O modelo da empresa fictícia aponta alta chance de o caixa romper o mínimo em meados de dezembro:
+O modelo da empresa fictícia aponta risco crescente de o caixa romper o mínimo (R$ 12 mi) em dezembro:
 13º, IRPJ, distribuição de lucros e compras de fim de ano caem juntos.
 
 É o tipo de pergunta que o Excel de média móvel nunca me respondeu. No simulador: antecipar um lote de
