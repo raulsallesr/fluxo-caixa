@@ -11,3 +11,6 @@ addopts = "--cov=engine --cov-fail-under=85"
 
 [tool.ruff]
 line-length = 100
+
+[tool.ruff.lint]
+extend-ignore = ["C408"]

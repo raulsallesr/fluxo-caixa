@@ -2,6 +2,8 @@
 from datetime import date, timedelta
 
 import holidays
+import numpy as np
+import pandas as pd
 
 
 def feriados_br(ano: int) -> holidays.HolidayBase:
@@ -28,3 +30,21 @@ def enesimo_dia_util(ano: int, mes: int, n: int) -> date:
             if cont == n:
                 return d
         d += timedelta(days=1)
+
+
+def anterior_dia_util(d: date) -> date:
+    while not eh_dia_util(d):
+        d -= timedelta(days=1)
+    return d
+
+
+def dias_uteis(inicio: date, fim: date) -> np.ndarray:
+    """Dias úteis em [inicio, fim] como array datetime64[D] ordenado."""
+    todos = pd.date_range(inicio, fim, freq="D")
+    return np.array([d.date() for d in todos if eh_dia_util(d.date())], dtype="datetime64[D]")
+
+
+def ajustar_dia_util(datas: np.ndarray, uteis: np.ndarray) -> np.ndarray:
+    """Empurra cada data para o próximo dia útil (`uteis` deve cobrir além do máximo)."""
+    idx = np.minimum(np.searchsorted(uteis, datas, side="left"), len(uteis) - 1)
+    return uteis[idx]
