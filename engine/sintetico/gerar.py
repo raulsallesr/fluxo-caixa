@@ -8,13 +8,8 @@ from datetime import date, timedelta
 import numpy as np
 import pandas as pd
 
-from engine.calendario import (
-    ajustar_dia_util,
-    anterior_dia_util,
-    dias_uteis,
-    enesimo_dia_util,
-    proximo_dia_util,
-)
+from engine.agenda import RECUP_SOBRE_RECEITA, agenda_recorrentes
+from engine.calendario import ajustar_dia_util, dias_uteis
 from engine.sintetico.clientes import (
     CATEGORIAS_FORNECEDOR,
     SEGMENTOS,
@@ -120,45 +115,13 @@ def _gerar_ap(cfg, rng, fornecedores, uteis):
 
 
 def _recorrentes(cfg, ar, rng):
-    """Folha, encargos, tributos, aluguel, dívida e outras entradas (mensais)."""
-    linhas = []
-    folha = cfg.receita_anual * 0.06 / 12
+    """Realizado dos recorrentes: mesma agenda da projeção, com recuperação aleatória."""
     ini = cfg.as_of - timedelta(days=cfg.dias_historico)
     emis_mes = ar.groupby(ar.emissao.dt.to_period("M")).valor.sum()
-
-    def add(d, tipo, cat, sub, valor):
-        if ini <= d <= cfg.as_of:
-            linhas.append(dict(data=d, tipo=tipo, categoria=cat, subcategoria=sub,
-                               valor=round(float(valor), 2)))
-
-    ano, mes = ini.year, ini.month
-    while date(ano, mes, 1) <= cfg.as_of:
-        add(enesimo_dia_util(ano, mes, 5), "saida", "Pessoal", "Folha de pagamento", folha)
-        add(proximo_dia_util(date(ano, mes, 7)), "saida", "Pessoal", "FGTS", folha * 0.08)
-        add(anterior_dia_util(date(ano, mes, 20)), "saida", "Pessoal", "INSS", folha * 0.20)
-        if mes == 11:
-            add(anterior_dia_util(date(ano, 11, 30)), "saida", "Pessoal",
-                "13º (1ª parcela)", folha * 0.5)
-        if mes == 12:
-            add(anterior_dia_util(date(ano, 12, 20)), "saida", "Pessoal",
-                "13º (2ª parcela)", folha * 0.5)
-        add(enesimo_dia_util(ano, mes, 5), "saida", "Ocupação", "Aluguel e condomínio", 180_000)
-        dia10 = proximo_dia_util(date(ano, mes, 10))
-        add(dia10, "saida", "Financeiras", "Dívida - amortização", 660_000)
-        add(dia10, "saida", "Financeiras", "Dívida - juros", 440_000)
-        # tributos sobre o faturamento do mês anterior
-        base = float(emis_mes.get(pd.Period(f"{ano}-{mes:02d}", "M") - 1, 0.0))
-        add(anterior_dia_util(date(ano, mes, 20)), "saida", "Tributos", "ICMS", base * 0.06)
-        add(anterior_dia_util(date(ano, mes, 25)), "saida", "Tributos", "PIS/COFINS",
-            base * 0.035)
-        if mes in (1, 4, 7, 10):
-            add(anterior_dia_util(date(ano, mes, 30)), "saida", "Tributos", "IRPJ/CSLL", 2_500_000)
-        if mes in (3, 6, 9, 12):
-            add(anterior_dia_util(date(ano, mes, 28)), "saida", "Sócios",
-                "Distribuição de lucros", 3_000_000)
-        add(enesimo_dia_util(ano, mes, 10), "entrada", "Outras entradas",
-            "Recuperação de impostos", cfg.receita_anual * 0.003 / 12 * rng.uniform(0.3, 1.7))
-        ano, mes = (ano + (mes == 12), mes % 12 + 1)
+    linhas = agenda_recorrentes(
+        ini, cfg.as_of, cfg.receita_anual,
+        base_mes=lambda p: float(emis_mes.get(p, 0.0)),
+        recup=lambda: cfg.receita_anual * RECUP_SOBRE_RECEITA / 12 * rng.uniform(0.3, 1.7))
     return pd.DataFrame(linhas)
 
 

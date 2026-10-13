@@ -48,3 +48,20 @@ def ajustar_dia_util(datas: np.ndarray, uteis: np.ndarray) -> np.ndarray:
     """Empurra cada data para o próximo dia útil (`uteis` deve cobrir além do máximo)."""
     idx = np.minimum(np.searchsorted(uteis, datas, side="left"), len(uteis) - 1)
     return uteis[idx]
+
+
+class Cal:
+    """Eixo de dias úteis: converte datas em índices inteiros (atrasos em dias úteis)."""
+
+    def __init__(self, inicio: date, fim: date):
+        self.uteis = dias_uteis(inicio, fim)
+
+    def idx(self, d: date) -> int:
+        """Índice do dia útil de `d` (ou do próximo, se `d` não for útil)."""
+        return int(np.searchsorted(self.uteis, np.datetime64(d)))
+
+    def idx_arr(self, datas) -> np.ndarray:
+        return np.searchsorted(self.uteis, np.asarray(datas, dtype="datetime64[D]"))
+
+    def data(self, i: int) -> date:
+        return self.uteis[i].astype(object)
