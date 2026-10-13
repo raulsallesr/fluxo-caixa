@@ -21,7 +21,6 @@ Monte Carlo no navegador. Plano completo: `C:\Users\User\.claude\plans\ol-veja-m
 
 ## Próximo passo
 Schema pydantic do snapshot + `exportar.py` (M1); depois "projetado" por safras (método direto) para a visão Hoje;
-depois schema pydantic do snapshot e `exportar.py`.
 
 ## Convenções
 Gates: `ruff check .` e `pytest` (cobertura ≥ 85%). Nenhum dado real, nenhum segredo.
