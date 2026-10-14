@@ -15,18 +15,17 @@ Monte Carlo no navegador. Plano completo: `C:\Users\User\.claude\plans\ol-veja-m
 - **Web pronto** (React/Vite/TS/ECharts, `web/`): 4 páginas (Hoje, Projeção, Cenários, Entenda), simulador
   TS em Web Worker. Gates: typecheck, 29 testes vitest (paridade com Python: maior diferença R$ 234 mil),
   build, e2e Playwright 23/23 (4 viewports, sem overflow, alvos ≥44px). Screenshots em `docs/assets/screens/`.
-- CI (`ci.yml`) e deploy no GitHub Pages (`deploy.yml`, cron diário com `--as-of hoje`) escritos, ainda
-  sem remoto. README bilíngue e `docs/METODOLOGIA.md` prontos.
+- **No ar (14/10/2026)**: repo https://github.com/raulsallesr/fluxo-caixa (público) e site
+  https://raulsallesr.github.io/fluxo-caixa/ . CI e Deploy verdes; `deploy.yml` regenera o snapshot
+  todo dia útil (`--as-of hoje`). README bilíngue e `docs/METODOLOGIA.md` prontos.
 - Node 24 instalado (terminal novo para o PATH).
 
 ## Bloqueios / decisões do Raul
-- Criar o repo no GitHub e habilitar Pages (Settings → Pages → Source: GitHub Actions); `gh` ausente.
-  Push só com confirmação.
-- Nome definitivo ("Fôlego" é provisório).
 - Compliance/RH da Fits: confirmar política sobre portfólio público na área de atuação antes do post.
+- Nome definitivo ("Fôlego" é provisório).
 
 ## Próximo passo
-Criar repo remoto + Pages (precisa `gh auth login`); conferir modo escuro; reduzir bundle (786 kB, ECharts)
+Publicar o post (após compliance); conferir modo escuro; reduzir bundle (786 kB, ECharts)
 com import dinâmico. v2: orçado × realizado, upload de CSV, efeito cliente no atraso, copiloto.
 
 ## Convenções

@@ -1,7 +1,7 @@
 # Rascunhos de posts — LinkedIn
 
 Antes de publicar: confirmar com compliance/RH da Fits a política sobre portfólio público na área de
-atuação, trocar `<LINK>` pelo endereço do GitHub Pages e conferir os números contra o `snapshot.json`
+atuação, trocar `https://raulsallesr.github.io/fluxo-caixa` pelo endereço do GitHub Pages e conferir os números contra o `snapshot.json`
 da data (o backtest abaixo é da data-base 13/10/2026).
 
 ## Post 1 — lançamento (o "porquê")
@@ -22,7 +22,7 @@ Refiz do zero, como app web (Python + React), com uma empresa fictícia e dados 
 No backtest, contra o método "média do passado" que eu usava: erro das saídas semanais de 7,6% contra
 17,4%, e do saldo projetado de 5,8% contra 16,4%.
 
-Código aberto, sem servidor, abre no celular: <LINK>
+Código aberto, sem servidor, abre no celular: https://raulsallesr.github.io/fluxo-caixa
 
 Projeto educacional, empresa fictícia, não é recomendação financeira.
 
@@ -45,7 +45,7 @@ O que fiz:
 O simulador roda no navegador (Web Worker, TypeScript) e é testado contra a referência em Python:
 os quantis batem dentro de tolerância. Sem backend.
 
-Detalhes e backtest: <LINK>/#/entenda
+Detalhes e backtest: https://raulsallesr.github.io/fluxo-caixa/#/entenda
 
 ## Post 3 — o achado (ganho de narrativa)
 
@@ -55,4 +55,4 @@ O modelo da empresa fictícia aponta risco crescente de o caixa romper o mínimo
 É o tipo de pergunta que o Excel de média móvel nunca me respondeu. No simulador: antecipar um lote de
 recebíveis ou captar capital de giro move a data — e dá para ver o custo.
 
-Teste os cenários: <LINK>/#/cenarios
+Teste os cenários: https://raulsallesr.github.io/fluxo-caixa/#/cenarios
