@@ -1,5 +1,7 @@
 # CONTEXT — Fôlego (previsão de fluxo de caixa)
 
+**Retomada: leia primeiro `docs/HANDOFF.md`** (passos, comandos, limitações). Decisões em `docs/DECISOES.md`, ideias em `docs/IDEIAS.md`.
+
 ## O que é
 Projeto de portfólio: previsão de caixa de uma distribuidora fictícia (dados 100% sintéticos).
 Motor Python (dados + modelos) → snapshot JSON → web app estático (React/Vite/TS) com
@@ -21,7 +23,7 @@ Monte Carlo no navegador. Plano completo: `C:\Users\User\.claude\plans\ol-veja-m
 - Node 24 instalado (terminal novo para o PATH).
 
 ## Bloqueios / decisões do Raul
-- Compliance/RH da Fits: confirmar política sobre portfólio público na área de atuação antes do post.
+- Compliance/RH do empregador: confirmar política sobre portfólio público na área de atuação antes do post.
 - Nome definitivo ("Fôlego" é provisório).
 
 ## Próximo passo

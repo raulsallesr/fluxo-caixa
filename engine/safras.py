@@ -46,7 +46,7 @@ def construir_safras(modelo: pv.ModeloCaixa, ar: pd.DataFrame, ap: pd.DataFrame,
     return pd.concat(linhas, ignore_index=True)
 
 
-def baseline_trinus(fluxo: pd.DataFrame, dia: date, cal: Cal, meses: int = 3) -> dict[str, float]:
+def baseline_media_passado(fluxo: pd.DataFrame, dia: date, cal: Cal, meses: int = 3) -> dict[str, float]:
     """Método 'média do passado': mesmo n-ésimo dia útil do mês nos `meses` meses anteriores."""
     i = cal.idx(dia)
     dias_mes = cal.uteis[(pd.DatetimeIndex(cal.uteis).to_period("M") == pd.Period(dia, "M"))]
@@ -75,7 +75,7 @@ def metricas_diarias(safras: pd.DataFrame, fluxo: pd.DataFrame, cal: Cal) -> dic
     out = {}
     for tipo in ("entrada", "saida"):
         t = tot[tot.tipo == tipo]
-        base = np.array([baseline_trinus(fluxo, d.date(), cal)[tipo] for d in t.data])
+        base = np.array([baseline_media_passado(fluxo, d.date(), cal)[tipo] for d in t.data])
         out[tipo] = dict(wape_modelo=round(wape(t.projetado.to_numpy(), t.realizado.to_numpy()), 4),
                          wape_baseline=round(wape(base, t.realizado.to_numpy()), 4))
     return out

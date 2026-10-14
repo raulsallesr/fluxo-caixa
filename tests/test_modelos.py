@@ -140,8 +140,8 @@ def test_safras_cobrem_o_realizado(emp, cal):
     assert met["saida"]["wape_modelo"] < met["saida"]["wape_baseline"]
 
 
-def test_baseline_trinus_usa_mesmo_dia_util(emp, cal):
-    b = sf.baseline_trinus(emp.fluxo, emp.config.as_of, cal)
+def test_baseline_media_passado_usa_mesmo_dia_util(emp, cal):
+    b = sf.baseline_media_passado(emp.fluxo, emp.config.as_of, cal)
     assert b["entrada"] > 0 and b["saida"] > 0
     assert sf.wape(np.array([1.0, 2.0]), np.array([1.0, 4.0])) == pytest.approx(2 / 5)
 

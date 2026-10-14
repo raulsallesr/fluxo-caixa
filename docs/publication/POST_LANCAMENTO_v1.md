@@ -1,6 +1,6 @@
 # Rascunhos de posts — LinkedIn
 
-Antes de publicar: confirmar com compliance/RH da Fits a política sobre portfólio público na área de
+Antes de publicar: confirmar com compliance/RH do empregador a política sobre portfólio público na área de
 atuação, trocar `https://raulsallesr.github.io/fluxo-caixa` pelo endereço do GitHub Pages e conferir os números contra o `snapshot.json`
 da data (o backtest abaixo é da data-base 13/10/2026).
 
