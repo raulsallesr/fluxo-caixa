@@ -5,7 +5,7 @@ Este arquivo permite continuar o projeto em qualquer máquina, sem depender do h
 ## Onde está
 - Repositório: https://github.com/raulsallesr/fluxo-caixa (público, MIT)
 - Site: https://raulsallesr.github.io/fluxo-caixa/
-- Pasta local (PC de casa): `C:\Users\User\Documents\fluxo-caixa`
+- Pasta local (PC de casa): `C:\Users\User\Projetos\fluxo-caixa`
 - Último commit no momento deste arquivo: ver `git log --oneline | head -1`
 
 ## Estado
